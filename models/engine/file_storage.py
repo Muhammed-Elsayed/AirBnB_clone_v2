@@ -35,6 +35,7 @@ class FileStorage:
             json.dump(temp, f)
     
     def delete(self, obj=None):
+        """deleting obj"""
         if (obj):
             key = obj.__class__.__name__ + '.' + obj.id
             if (key in self.__objects):
