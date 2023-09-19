@@ -3,9 +3,9 @@
 
 import uuid
 from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, 
+from sqlalchemy.orm import relationship
 
 
 
@@ -17,8 +17,8 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
 
         id = Column(String(60), nullable=False, unique=True, primary_key=True)
-        created_at = Column(datetime, nullable=False, default= datetime.utcnow())
-        updated_at = Column(datetime, nullable=False, default= datetime.utcnow())
+        created_at = Column(DateTime, nullable=False, default= datetime.utcnow())
+        updated_at = Column(DateTime, nullable=False, default= datetime.utcnow())
 
         """Instatntiates a new model"""
         if not kwargs:
@@ -63,9 +63,8 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        key_to_delete = '_sa_instance_state'
-        if key_to_delete in dictionary.keys():
-            del dictionary[key_to_delete]
         
+        if  "_sa_instance_state" in dictionary.keys():
+                del dictionary["_sa_instance_state"]
         return dictionary
     
