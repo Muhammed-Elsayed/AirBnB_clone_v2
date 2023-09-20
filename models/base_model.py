@@ -52,7 +52,6 @@ class BaseModel:
     
     def delete(self):
         from models import storage
-        del self
         storage.delete(self)
 
     def to_dict(self):
