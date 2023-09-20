@@ -9,15 +9,18 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 
 
-if getenv("HBNB_TYPE_STORAGE") == 'db':
-    intermediate_table = Table("place_amenity", Base.metadata,
-                           Column("place_id", String(60),
-                                  ForeignKey("places.id"), nullable=False,
-                                  primary_key=True),
-                           Column("amenity_id", String(60),
-                                  ForeignKey("amenities.id"), nullable=False,
-                                  primary_key=True))
-
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    place_amenity = Table('place_amenity', Base.metadata,
+                          Column('place_id',
+                                 String(60),
+                                 ForeignKey('places.id'),
+                                 primary_key=True,
+                                 nullable=False),
+                          Column('amenity_id',
+                                 String(60),
+                                 ForeignKey('amenities.id'),
+                                 primary_key=True,
+                                 nullable=False))
 
 class Place(BaseModel, Base):
     """ A place to stay for mysql database with variuos attributes"""
