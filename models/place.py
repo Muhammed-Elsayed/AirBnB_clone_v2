@@ -10,8 +10,8 @@ from sqlalchemy.orm import relationship
 
 
 intermediate_table = Table("place_amenity", Base.metadata,
-                           Column("place_id", String(60), nullable=False,
-                                  ForeignKey("places.id"), primary_key=True)
+                           Column("place_id", String(60)
+                                  ForeignKey("places.id"),nullable=False, primary_key=True)
                            Column("amenity_id", String(60), nullable=False,
                                   ForeignKey("amenities.id"),
                                   primary_key=True))
@@ -20,8 +20,8 @@ intermediate_table = Table("place_amenity", Base.metadata,
 class Place(BaseModel, Base):
     """ A place to stay for mysql database with variuos attributes"""
     __tablename__ = "places"
-    city_id = Column(String(60), nullable=False, ForeignKey("cities.id"))
-    user_id = Column(String(60), nullable=False, ForeignKey("users.id"))
+    city_id = Column(String(60), ForeignKey("cities.id"),nullable=False)
+    user_id = Column(String(60),ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
     description = Column(String(1024))
     number_rooms = Column(Integer, default=0)
