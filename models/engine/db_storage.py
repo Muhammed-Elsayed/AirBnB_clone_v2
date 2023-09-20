@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+"""represents db storage"""
+from sqlalchemy import create_engine
 from os import getenv
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models import City, State, User, Review, Place, Amenity
-
-"""
-db storage
-"""
 
 
 class DBStorage:
