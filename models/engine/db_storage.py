@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from os import getenv
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from models import City, State, User, Review, Place, Amenity
 
 """
 db storage
@@ -17,16 +18,16 @@ class DBStorage:
 
     def __init__(self):
         """init"""
-        self.__engine = create_engine(f'mysql+mysqldb://{getenv("HBNB_MYSQL_USER")}\
-								:{getenv("HBNB_MYSQL_PWD")}\
-									@{getenv("HBNB_MYSQL_HOST")}/{getenv("HBNB_MYSQL_DB")}'\
-                                        ,pool_pre_ping=True)
-        
+        self.__engine = create_engine(f'mysql+mysqldb://\
+                                      {getenv("HBNB_MYSQL_USER")}\
+                                      :{getenv("HBNB_MYSQL_PWD")}\
+                                      @{getenv("HBNB_MYSQL_HOST")}\
+                                      /{getenv("HBNB_MYSQL_DB")}',
+                                      pool_pre_ping=True)
 
         if getenv('HBNB_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
 
-    
     def all(self, cls=None):
         """documentatoin"""
         if cls is None:
@@ -40,8 +41,7 @@ class DBStorage:
             if type(cls) is str:
                 cls = eval(cls)
             objs = self.__session.query(cls).all()
-
-        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs)}
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
         """add obj"""
@@ -59,6 +59,7 @@ class DBStorage:
     def reload(self):
         """jjjjj"""
         Base.metadata.create_all(self.__engine)
-        Session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         Session = scoped_session(Session_factory)
         self.__session = Session()

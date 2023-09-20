@@ -2,10 +2,9 @@
 """ City Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models import state
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import create_engine, Column, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
 
 
 class City(BaseModel, Base):
@@ -16,4 +15,3 @@ class City(BaseModel, Base):
     name = Column(String(128), nullable=False)
     state = relationship('State', back_populates='cities')
     places = relationship("Place", backref="cities", cascade="delete")
-
