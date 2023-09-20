@@ -4,7 +4,14 @@ from sqlalchemy import create_engine
 from os import getenv
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models import City, State, User, Review, Place, Amenity
+
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.city import City
+from models.state import State
+from models.user import User
 
 
 class DBStorage:

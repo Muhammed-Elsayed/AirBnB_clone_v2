@@ -9,7 +9,8 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 
 
-intermediate_table = Table("place_amenity", Base.metadata,
+if getenv("HBNB_TYPE_STORAGE") == 'db':
+    intermediate_table = Table("place_amenity", Base.metadata,
                            Column("place_id", String(60),
                                   ForeignKey("places.id"), nullable=False,
                                   primary_key=True),
