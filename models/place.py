@@ -22,6 +22,7 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
                                  primary_key=True,
                                  nullable=False))
 
+
 class Place(BaseModel, Base):
     """ A place to stay for mysql database with variuos attributes"""
     if getenv("HBNB_TYPE_STORAGE", None) == "db":
@@ -40,7 +41,7 @@ class Place(BaseModel, Base):
 
         reviews = relationship("Review", backref="place", cascade="delete")
         amenities = relationship("Amenity", secondary="place_amenity",
-                                    viewonly=False)
+                                 viewonly=False)
 
     else:
         city_id = ""
@@ -54,7 +55,7 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
-                
+
         @property
         def reviews(self):
             """Get a list of all linked Reviews."""
