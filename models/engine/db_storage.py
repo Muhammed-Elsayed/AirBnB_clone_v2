@@ -29,13 +29,19 @@ class DBStorage:
     
     def all(self, cls=None):
         """documentatoin"""
-        if (cls == None):
-            objs = self.__session.query()
-
-        
-        
+        if cls is None:
+            objs = self.__session.query(State).all()
+            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(City).all())
+            objs.extend(self.__session.query(Amenity).all())
+            objs.extend(self.__session.query(Place).all())
+            objs.extend(self.__session.query(Review).all())
         else:
-            pass
+            if type(cls) is str:
+                cls = eval(cls)
+            objs = self.__session.query(cls).all()
+
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs)}
 
 
 
