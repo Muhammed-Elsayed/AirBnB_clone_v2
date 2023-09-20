@@ -10,10 +10,10 @@ from sqlalchemy.orm import relationship
 
 
 intermediate_table = Table("place_amenity", Base.metadata,
-                           Column("place_id", String(60)
-                                  ForeignKey("places.id"),nullable=False, primary_key=True)
-                           Column("amenity_id", String(60), nullable=False,
-                                  ForeignKey("amenities.id"),
+                           Column("place_id", String(60),
+                                  ForeignKey("places.id"), nullable=False, primary_key=True),
+                           Column("amenity_id", String(60),
+                                  ForeignKey("amenities.id"), nullable=False,
                                   primary_key=True))
 
 
