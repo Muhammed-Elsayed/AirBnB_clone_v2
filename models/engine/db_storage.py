@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
 from models.base_model import Base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 """
 db storage
@@ -43,8 +43,22 @@ class DBStorage:
 
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs)}
 
+    def new(self, obj):
+        """add obj"""
+        self.__session.add(obj)
 
+    def save(self):
+        """commit changes"""
+        self.__session.commit()
 
-        
+    def delete(self, obj=None):
+        """delete obj if not none"""
+        if obj:
+            self.__session.delete(obj)
 
-        
+    def reload(self):
+        """jjjjj"""
+        Base.metadata.create_all(self.__engine)
+        Session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(Session_factory)
+        self.__session = Session()
