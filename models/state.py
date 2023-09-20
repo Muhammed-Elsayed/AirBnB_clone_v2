@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from models import storage
+from models.city import City
 
 class State(BaseModel, Base):
     """ State class """
@@ -17,8 +18,11 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        pass
-        
-
+        """Get a list of all linked cities."""
+        cities_list = []
+        for city in list(storage.all(City).values()):
+            if city.state_id == self.id:
+                cities_list.append(city)
+        return cities_list
 
 
