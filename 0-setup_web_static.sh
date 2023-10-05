@@ -5,7 +5,7 @@
 sudo apt update
 sudo apt install nginx -y
 
-mkdir -p /data/web_static/releases/test/index.html
+mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
 echo "Hello, World!" > /data/web_static/releases/test/index.html
