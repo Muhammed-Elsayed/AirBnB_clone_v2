@@ -9,7 +9,7 @@ from fabric.api import run
 
 def do_deploy(archive_path):
     """upload the archive to the web server and unzip it"""
-    env.hosts = ["", ""]
+    env.hosts = ["18.204.7.111", "100.26.213.167"]
 
     if os.path.exists(archive_path):
         try:
