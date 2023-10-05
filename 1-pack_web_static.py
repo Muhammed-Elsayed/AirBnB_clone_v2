@@ -10,11 +10,11 @@ def do_pack():
     """creates archive file"""
     dt = datetime.utcnow()
     archive_file = "versions/web_static_{}{}{}{}{}{}".format(dt.year,
-							     dt.month,
-							     dt.day,
-							     dt.hour,
-							     dt.minute,
-							     dt.second)
+                                                             dt.month,
+                                                             dt.day,
+                                                             dt.hour,
+                                                             dt.minute,
+                                                             dt.second)
 
     if local("mkdir -p versions").failed is True:
         return None
