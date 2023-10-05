@@ -9,7 +9,7 @@ from datetime import datetime
 def do_pack():
     """creates archive file"""
     dt = datetime.utcnow()
-    archive_file = "versions/web_static_{}{}{}{}{}{}".format(dt.year,
+    archive_file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
                                                              dt.month,
                                                              dt.day,
                                                              dt.hour,
