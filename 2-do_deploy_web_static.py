@@ -7,10 +7,11 @@ from fabric.api import put
 from fabric.api import run
 
 
+env.hosts = ["18.204.7.111", "100.26.213.167"]
+
+
 def do_deploy(archive_path):
     """upload the archive to the web server and unzip it"""
-    env.hosts = ["18.204.7.111", "100.26.213.167"]
-
     if os.path.exists(archive_path):
         try:
             fileName = archive_path.split("/")[1].split(".")[0]
