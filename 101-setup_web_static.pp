@@ -7,10 +7,10 @@ $nginx_conf = "server {
     root   /var/www/html;
     index  index.html index.htm;
     location /hbnb_static {
-        alias /data/web_static/current;
+        alias /data/web_static/current/;
     }
     location /redirect_me {
-        return 301 http://linktr.ee/firdaus_h_salim/;
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
     error_page 404 /404.html;
     location = /404.html {
@@ -20,8 +20,7 @@ $nginx_conf = "server {
 }"
 
 package { 'nginx':
-  ensure   => 'present',
-  provider => 'apt'
+  ensure   => 'installed'
 }
 
 -> file { '/data':
@@ -55,7 +54,7 @@ package { 'nginx':
 }
 
 -> exec { 'chown -R ubuntu:ubuntu /data/':
-  path => '/usr/bin/:/usr/local/bin/:/bin/'
+  command => 'chown -R ubuntu:ubuntu /data/'
 }
 
 file { '/var/www':
