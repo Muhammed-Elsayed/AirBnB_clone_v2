@@ -18,10 +18,10 @@ def do_clean(number=0):
     [archives.pop() for i in range(number)]
 
     with lcd("versions"):
-        [local("rm -rf {}".format(d) for d in archives)]
+        [local("rm -rf ./{}".format(d)) for d in archives]
 
     with cd("/data/web_static/releases"):
         archives = run("ls -tr").split()
         archives = [d for d in archives if "web_static_" in d]
         [archives.pop() for i in range(number)]
-        [run("rm -rf {}".format(d) for d in archives)]
+        [run("rm -rf ./{}".format(d)) for d in archives]
