@@ -15,13 +15,19 @@ def do_deploy(archive_path):
     if os.path.exists(archive_path):
         try:
             fileName = archive_path.split("/")[1].split(".")[0]
+            archive = archive_path.split("/")[1]
             put(archive_path, "/tmp/")
-            run("tar -xvzf /tmp/{}.tgz -C /data/web_static/\
-                releases/{}".format(fileName, fileName))
-            run("rm -rf /tmp/{}.tgz".format(fileName))
+            run("mkdir -p /data/web_static/releases/{}/".format(fileName))
+            run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".format(
+                archive, fileName))
+            run("rm -rf /tmp/{}".format(archive))
+            run("mv /data/web_static/releases/{}/web_static/* "
+                "/data/web_static/releases/{}/".format(fileName, fileName))
+            run("rm -rf /data/web_static/releases/{}/web_static".format(
+                fileName))
             run("sudo rm -rf /data/web_static/current")
-            run("ln -sf /data/web_static/releases/{} /data\
-                /web_static/current".format(fileName))
+            run("ln -s /data/web_static/releases/{} "
+                "/data/web_static/current".format(fileName))
         except Exception:
             return False
         return True
