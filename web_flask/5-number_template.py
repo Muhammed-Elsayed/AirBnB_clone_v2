@@ -36,6 +36,7 @@ def is_int_page(n):
     """display n if it's int"""
     return "{} is a number".format(n)
 
+
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def html_page(n):
     """html page display"""
