@@ -40,7 +40,7 @@ def is_int_page(n):
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def html_page(n):
     """html page display"""
-    return
+    return render_template("5-number.html", n=n)
 
 
 if __name__ == "__main__":
