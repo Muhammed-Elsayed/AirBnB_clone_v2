@@ -32,13 +32,13 @@ def python_page(text="is cool"):
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
-def is_int_page(n):
+def number(n):
     """display n if it's int"""
     return "{} is a number".format(n)
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
-def html_page(n):
+def number_templates(n):
     """html page display"""
     return render_template("5-number.html", n=n)
 
