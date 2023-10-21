@@ -12,7 +12,7 @@ def home_page():
 
 
 @app.route("/hbnb", strict_slashes=False)
-def home_page():
+def hbnb_page():
     """Displays 'HBNB'"""
     return "“HBNB”"
 
